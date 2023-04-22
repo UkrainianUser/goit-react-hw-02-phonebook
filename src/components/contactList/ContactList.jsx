@@ -1,4 +1,5 @@
 import React from "react";
+import css from "./ContactList.module.css";
 
 const ContactList = ({contacts, filter, onDeleteContact}) => {
 
@@ -6,11 +7,11 @@ const ContactList = ({contacts, filter, onDeleteContact}) => {
 	const filteredContacts = contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter));
 
 	return (
-		<ul>
+		<ul className={css.contactsList}>
 			{filteredContacts.map(contact => (
-				<li key={contact.id}>
-					{contact.name}: {contact.number}
-					<button type="button" onClick={()=>onDeleteContact(contact.id)}>Delete</button>
+				<li className={css.contactsItem} key={contact.id}>
+					<span>{contact.name}:</span> <span>{contact.number}</span>
+					<button className={css.contactsBtn} type="button" onClick={()=>onDeleteContact(contact.id)}>Delete</button>
 					</li>
 			))}
 		</ul>

@@ -1,4 +1,5 @@
 import React from "react";
+import css from "./App.module.css";
 import ContactForm from "./contactForm/ContactForm";
 import Filter from "./filter/Filter";
 import ContactList from "./contactList/ContactList"
@@ -45,7 +46,7 @@ class App extends React.Component {
 
   render () {
     return (
-      <div>
+      <div className={css.phonebook}>
         <h1>Phonebook</h1>
         <ContactForm onSubmit={this.formSubmitHandler} isNameExist={this.isNameExist} />
         <h2>Contacts</h2>
