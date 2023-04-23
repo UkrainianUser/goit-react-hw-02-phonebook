@@ -17,7 +17,12 @@ class App extends React.Component {
     filter: '',
   };
 
-  formSubmitHandler = data => {
+  formSubmitHandler = (data) => {
+    const { name } = data;
+    if (this.isNameExist(name)) {
+      alert(`${name} is already in contacts.`);
+      return;
+    }
     const newContact = {
       id: nanoid(),
       name: data.name,
@@ -30,7 +35,7 @@ class App extends React.Component {
     }));
   };
 
-  handleChangeFilter = evt => {
+  handleChangeFilter = (evt) => {
     this.setState({filter: evt.currentTarget.value});
   };
 
@@ -45,13 +50,17 @@ class App extends React.Component {
   }
 
   render () {
+
+    const normalizedFilter = this.state.filter.toLowerCase();
+    const filteredContacts = this.state.contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter));
+  
     return (
       <div className={css.phonebook}>
         <h1>Phonebook</h1>
-        <ContactForm onSubmit={this.formSubmitHandler} isNameExist={this.isNameExist} />
+        <ContactForm onSubmit={this.formSubmitHandler} />
         <h2>Contacts</h2>
         <Filter value={this.state.filter} onChange={this.handleChangeFilter} />
-        <ContactList contacts={this.state.contacts} filter={this.state.filter} onDeleteContact={this.deleteContact} />
+        <ContactList contacts={filteredContacts} onDeleteContact={this.deleteContact} />
       </div>
     );
   }

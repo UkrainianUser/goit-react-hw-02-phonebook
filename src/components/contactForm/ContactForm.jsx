@@ -15,13 +15,8 @@ class ContactForm extends React.Component {
 
 	handleSubmit = evt => {
     evt.preventDefault();
-
-		if (this.props.isNameExist(this.state.name)) {
-			alert(`${this.state.name} is already in contacts.`);
-		} else {
-			this.props.onSubmit(this.state);
-			this.reset();
-		}
+		this.props.onSubmit(this.state);
+		this.reset();
   };
 
 	reset = () => {
